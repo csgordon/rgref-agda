@@ -65,6 +65,14 @@ module RGref where
     !_ : {T : Set} {P : T -> heap -> Set} {R : T -> T -> heap -> heap -> Set} {G : T -> T -> heap -> heap -> Set} -> Ref T P R G -> T
     convert-P : {T : Set} {P : hpred T} {R : hrel T} {G : hrel T} (r : Ref T P R G) (P' : hpred T) (pf : P ⊆ P') -> Ref T P' R G
 
+  -- Proof Axioms
+  postulate
+    -- conversion doesn't affect what properties are true of a heap select
+    conversion-eq : {T : Set} {P : hpred T} {P' : hpred T} {R : hrel T} {G : hrel T}
+                    (r : Ref T P R G) (pf : P ⊆ P') (h : heap) -> (_[_] h r) ≡ (_[_] h (convert-P r P' pf))
+    conversion-eq' : {T : Set} {P : hpred T} {P' : hpred T} {R : hrel T} {G : hrel T}
+                    (r : Ref T P R G) (pf : P ⊆ P') (h : heap) (I : T -> Set) -> I (_[_] h r) -> I (_[_] h (convert-P r P' pf))
+
   -- Monadic Axioms
   postulate
     -- RGref monad, TODO: IMPLEMENT SUBSTRUCTURAL SUPPORT
@@ -84,6 +92,7 @@ module RGref where
     {- TODO: stability checks, precision, self-splitting, etc. -}
     alloc : ∀ {τ} P R G -> (e : τ) -> (∀ h → P e h) -> ● (Ref τ P R G)
 
+  infixl 50 _>>=_
 
 -- Monotonically increasing counter, in the Agda DSL
   inc : hrel ℕ
