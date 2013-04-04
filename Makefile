@@ -5,3 +5,6 @@ compile:
 
 html:
 	agda --html $(INCLUDE) RGref.agda
+
+pubhtml:
+	cp -f html ~/public_html/agda
