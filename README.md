@@ -9,6 +9,8 @@ obligations for guarantee satisfaction at writes.  I may develop this port furth
 usage model is to flesh out mutually-inductive mutually-indexing datatypes in this version, then
 transfer the code to Coq and the unpleasant encoding.
 
+For a more complete implementation, see [RGref-Coq](https://github.com/csgordon/rgref).
+
 The main advantages of an Agda port are:
 - Agda better supports definitions of recursive-by-reference data structures such as reference-based
   linked lists.  This needs mutual inductive definitions where one type indexes the other.  Agda
