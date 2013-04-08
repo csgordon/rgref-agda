@@ -4,6 +4,11 @@ This repository holds an experimental port of the RGref prototype for rely-guara
 Coq to Agda.  The main goal of the port is to be able to more rapidly experiment with mutual
 definition of linked recursive data structures and predicates over those structures.
 
+Essentially only enough of RGref is implemented to play with LinkedList-style definitions and force
+obligations for guarantee satisfaction at writes.  I may develop this port further, but the current
+usage model is to flesh out mutually-inductive mutually-indexing datatypes in this version, then
+transfer the code to Coq and the unpleasant encoding.
+
 The main advantages of an Agda port are:
 - Agda better supports definitions of recursive-by-reference data structures such as reference-based
   linked lists.  This needs mutual inductive definitions where one type indexes the other.  Agda
@@ -21,3 +26,12 @@ The main disadvantages are
 
 This implementation is *extremely* rough.  The Coq implementation is already rough around the edges,
 but this version currently lacks many important soundness checks.
+
+Unimplemented features and proof obligations include:
+- Reflexivity checks at reads
+- Relation folding
+- Stability checks
+- Precision checks
+- Splitting checks
+- Substructural support
+
